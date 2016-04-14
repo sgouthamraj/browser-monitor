@@ -215,7 +215,7 @@ namespace BrowserMonitor
            
         }
 
-        public int createNewProcess(string browser, string url, bool privateBrowser)
+        public int createNewProcess(string browser, string url)
         {
             selectedProcesses = new LinkedList<ProcessUsage>();
 
@@ -233,24 +233,7 @@ namespace BrowserMonitor
             if (isValidBrowser)
             {
                 Process newProcess = new Process();
-                if (privateBrowser)
-                {
-                    string extraArg = "";
-                    if(_browser == "iexplore")
-                    {
-                        extraArg = "-private ";
-                    }
-                    else if(_browser =="chrome")
-                    {
-                        extraArg = "--incognito ";
-                    }
-                    newProcess.StartInfo = new System.Diagnostics.ProcessStartInfo(_browser, extraArg + url);
-                }
-                else
-                {
-                    newProcess.StartInfo = new System.Diagnostics.ProcessStartInfo(_browser, url);
-                }
-                
+                newProcess.StartInfo = new System.Diagnostics.ProcessStartInfo(_browser,url);
                 newProcess.Start();
                 System.Threading.Thread.Sleep(1000);
                 foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcessesByName(_browser))

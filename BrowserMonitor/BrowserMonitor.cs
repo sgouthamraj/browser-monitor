@@ -132,10 +132,6 @@ namespace BrowserMonitor
                 this.Show();
                 this.WindowState = FormWindowState.Normal;
             }
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.Activate();
-            }
         }
 
         private void quitApp_Click(object sender, EventArgs e)
@@ -250,7 +246,7 @@ namespace BrowserMonitor
             }
             if (validateURL(this.url.Text))
             {
-                ph.createNewProcess((string)this.browsers.SelectedItem, this.url.Text, this.privateBrowser.Checked);
+                ph.createNewProcess((string)this.browsers.SelectedItem, this.url.Text);
                 graphPanel.Visible = true;
                 selectionPanel.Visible = false;
                 logger = new Logger(this.url.Text, (string)this.browsers.SelectedItem);

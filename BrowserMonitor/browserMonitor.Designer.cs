@@ -34,6 +34,12 @@
             this.notifyIconStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.quitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.selectionPanel = new System.Windows.Forms.Panel();
+            this.url = new System.Windows.Forms.TextBox();
+            this.quitButton = new System.Windows.Forms.Button();
+            this.browserLabel = new System.Windows.Forms.Label();
+            this.monitorButton = new System.Windows.Forms.Button();
+            this.currentURLLabel = new System.Windows.Forms.Label();
+            this.browsers = new System.Windows.Forms.ComboBox();
             this.graphPanel = new System.Windows.Forms.Panel();
             this.MemAvgLabel = new System.Windows.Forms.Label();
             this.MemMaxLabel = new System.Windows.Forms.Label();
@@ -52,13 +58,6 @@
             this.seletedURLLabel = new System.Windows.Forms.Label();
             this.selectedBrowserLabel = new System.Windows.Forms.Label();
             this.stopMonitoringButton = new System.Windows.Forms.Button();
-            this.privateBrowser = new System.Windows.Forms.CheckBox();
-            this.url = new System.Windows.Forms.TextBox();
-            this.quitButton = new System.Windows.Forms.Button();
-            this.browserLabel = new System.Windows.Forms.Label();
-            this.monitorButton = new System.Windows.Forms.Button();
-            this.currentURLLabel = new System.Windows.Forms.Label();
-            this.browsers = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.monitorTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIconStrip.SuspendLayout();
@@ -94,7 +93,6 @@
             // 
             // selectionPanel
             // 
-            this.selectionPanel.Controls.Add(this.privateBrowser);
             this.selectionPanel.Controls.Add(this.url);
             this.selectionPanel.Controls.Add(this.quitButton);
             this.selectionPanel.Controls.Add(this.browserLabel);
@@ -105,6 +103,70 @@
             this.selectionPanel.Name = "selectionPanel";
             this.selectionPanel.Size = new System.Drawing.Size(428, 155);
             this.selectionPanel.TabIndex = 0;
+            // 
+            // url
+            // 
+            this.url.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.url.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.url.Location = new System.Drawing.Point(98, 45);
+            this.url.Name = "url";
+            this.url.Size = new System.Drawing.Size(311, 20);
+            this.url.TabIndex = 6;
+            this.toolTip.SetToolTip(this.url, "URL to be monitored");
+            // 
+            // quitButton
+            // 
+            this.quitButton.Location = new System.Drawing.Point(334, 110);
+            this.quitButton.Name = "quitButton";
+            this.quitButton.Size = new System.Drawing.Size(75, 23);
+            this.quitButton.TabIndex = 5;
+            this.quitButton.Text = "Quit";
+            this.toolTip.SetToolTip(this.quitButton, "Quit Browser Monitor");
+            this.quitButton.UseVisualStyleBackColor = true;
+            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
+            // 
+            // browserLabel
+            // 
+            this.browserLabel.AutoSize = true;
+            this.browserLabel.Location = new System.Drawing.Point(12, 21);
+            this.browserLabel.Name = "browserLabel";
+            this.browserLabel.Size = new System.Drawing.Size(45, 13);
+            this.browserLabel.TabIndex = 1;
+            this.browserLabel.Text = "Browser";
+            // 
+            // monitorButton
+            // 
+            this.monitorButton.Location = new System.Drawing.Point(253, 110);
+            this.monitorButton.Name = "monitorButton";
+            this.monitorButton.Size = new System.Drawing.Size(75, 23);
+            this.monitorButton.TabIndex = 4;
+            this.monitorButton.Text = "Monitor";
+            this.toolTip.SetToolTip(this.monitorButton, "Start monitoring current URL of the selected browser");
+            this.monitorButton.UseVisualStyleBackColor = true;
+            this.monitorButton.Click += new System.EventHandler(this.monitorButton_Click);
+            // 
+            // currentURLLabel
+            // 
+            this.currentURLLabel.AutoSize = true;
+            this.currentURLLabel.Location = new System.Drawing.Point(12, 52);
+            this.currentURLLabel.Name = "currentURLLabel";
+            this.currentURLLabel.Size = new System.Drawing.Size(75, 13);
+            this.currentURLLabel.TabIndex = 2;
+            this.currentURLLabel.Text = "Enter the URL";
+            this.toolTip.SetToolTip(this.currentURLLabel, "Current URL of the selected browser");
+            // 
+            // browsers
+            // 
+            this.browsers.FormattingEnabled = true;
+            this.browsers.Items.AddRange(new object[] {
+            "IE",
+            "Chrome"});
+            this.browsers.Location = new System.Drawing.Point(98, 18);
+            this.browsers.Name = "browsers";
+            this.browsers.Size = new System.Drawing.Size(132, 21);
+            this.browsers.TabIndex = 0;
+            this.toolTip.SetToolTip(this.browsers, "Brower to Monitor");
+            this.browsers.SelectedIndexChanged += new System.EventHandler(this.browsers_SelectedIndexChanged);
             // 
             // graphPanel
             // 
@@ -294,80 +356,6 @@
             this.stopMonitoringButton.UseVisualStyleBackColor = true;
             this.stopMonitoringButton.Click += new System.EventHandler(this.stopMonitoringButton_Click);
             // 
-            // privateBrowser
-            // 
-            this.privateBrowser.AutoSize = true;
-            this.privateBrowser.Location = new System.Drawing.Point(253, 20);
-            this.privateBrowser.Name = "privateBrowser";
-            this.privateBrowser.Size = new System.Drawing.Size(59, 17);
-            this.privateBrowser.TabIndex = 7;
-            this.privateBrowser.Text = "Private";
-            this.privateBrowser.UseVisualStyleBackColor = true;
-            // 
-            // url
-            // 
-            this.url.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.url.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.url.Location = new System.Drawing.Point(98, 45);
-            this.url.Name = "url";
-            this.url.Size = new System.Drawing.Size(311, 20);
-            this.url.TabIndex = 6;
-            this.toolTip.SetToolTip(this.url, "URL to be monitored");
-            // 
-            // quitButton
-            // 
-            this.quitButton.Location = new System.Drawing.Point(334, 110);
-            this.quitButton.Name = "quitButton";
-            this.quitButton.Size = new System.Drawing.Size(75, 23);
-            this.quitButton.TabIndex = 5;
-            this.quitButton.Text = "Quit";
-            this.toolTip.SetToolTip(this.quitButton, "Quit Browser Monitor");
-            this.quitButton.UseVisualStyleBackColor = true;
-            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
-            // 
-            // browserLabel
-            // 
-            this.browserLabel.AutoSize = true;
-            this.browserLabel.Location = new System.Drawing.Point(12, 21);
-            this.browserLabel.Name = "browserLabel";
-            this.browserLabel.Size = new System.Drawing.Size(45, 13);
-            this.browserLabel.TabIndex = 1;
-            this.browserLabel.Text = "Browser";
-            // 
-            // monitorButton
-            // 
-            this.monitorButton.Location = new System.Drawing.Point(253, 110);
-            this.monitorButton.Name = "monitorButton";
-            this.monitorButton.Size = new System.Drawing.Size(75, 23);
-            this.monitorButton.TabIndex = 4;
-            this.monitorButton.Text = "Monitor";
-            this.toolTip.SetToolTip(this.monitorButton, "Start monitoring current URL of the selected browser");
-            this.monitorButton.UseVisualStyleBackColor = true;
-            this.monitorButton.Click += new System.EventHandler(this.monitorButton_Click);
-            // 
-            // currentURLLabel
-            // 
-            this.currentURLLabel.AutoSize = true;
-            this.currentURLLabel.Location = new System.Drawing.Point(12, 52);
-            this.currentURLLabel.Name = "currentURLLabel";
-            this.currentURLLabel.Size = new System.Drawing.Size(75, 13);
-            this.currentURLLabel.TabIndex = 2;
-            this.currentURLLabel.Text = "Enter the URL";
-            this.toolTip.SetToolTip(this.currentURLLabel, "Current URL of the selected browser");
-            // 
-            // browsers
-            // 
-            this.browsers.FormattingEnabled = true;
-            this.browsers.Items.AddRange(new object[] {
-            "IE",
-            "Chrome"});
-            this.browsers.Location = new System.Drawing.Point(98, 18);
-            this.browsers.Name = "browsers";
-            this.browsers.Size = new System.Drawing.Size(132, 21);
-            this.browsers.TabIndex = 0;
-            this.toolTip.SetToolTip(this.browsers, "Brower to Monitor");
-            this.browsers.SelectedIndexChanged += new System.EventHandler(this.browsers_SelectedIndexChanged);
-            // 
             // monitorTimer
             // 
             this.monitorTimer.Interval = 1000;
@@ -378,7 +366,7 @@
             this.AcceptButton = this.monitorButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 176);
+            this.ClientSize = new System.Drawing.Size(452, 180);
             this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.selectionPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -429,7 +417,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox privateBrowser;
     }
 }
 
